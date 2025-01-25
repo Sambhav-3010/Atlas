@@ -25,9 +25,11 @@ def process_input(city, food_preferences, places_to_visit, social_preference, du
             "social_preference": social_preference,
             "duration": duration
         }
-
+        print("Started processing input...")
+        print("Input data:", input_dict)
         # Execute flow and return response
         response = client.flow.test(flow, input_dict)
+        print(response)
         return response
 
     except Exception as e:

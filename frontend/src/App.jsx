@@ -3,7 +3,7 @@ import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Spline from "./components/Spline";
 import About from "./components/About";
-import Interests from './components/Interests';
+import Output from "./components/Output";
 
 function App() {
   return (
@@ -13,6 +13,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/output" element={<Output />} />
         </Routes>
       </Router>
     </div>

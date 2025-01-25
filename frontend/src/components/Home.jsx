@@ -1,26 +1,46 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Spline from './Spline';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Spline from "./Spline";
 
 const Home = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    destination: "",
-    food: "",
-    places: "",
-    social: "",
-    duration: ""
+    city: "",
+    food_preferences: "",
+    places_to_visit: "",
+    social_preference: "",
+    duration: "",
   });
 
   const [currentField, setCurrentField] = useState(0);
 
   const fields = [
-    { id: "destination", name: "destination", placeholder: "Enter your dream destination here!" },
-    { id: "food", name: "food", placeholder: "Enter your food preferences here!" },
-    { id: "places", name: "places", placeholder: "Enter places you want to visit!" },
-    { id: "social", name: "social", placeholder: "Enter your social preferences!" },
-    { id: "duration", name: "duration", placeholder: "Enter the duration of your trip!" }
+    {
+      id: "city",
+      name: "city",
+      placeholder: "Enter your dream destination here!",
+    },
+    {
+      id: "food_preferences",
+      name: "food_preferences",
+      placeholder: "Enter your food preferences here!",
+    },
+    {
+      id: "places_to_visit",
+      name: "places_to_visit",
+      placeholder: "Enter places you want to visit!",
+    },
+    {
+      id: "social_preference",
+      name: "social_preference",
+      placeholder: "Enter your social preferences!",
+    },
+    {
+      id: "duration",
+      name: "duration",
+      placeholder: "Enter the duration of your trip!",
+    },
   ];
 
   const handleChange = (e) => {
@@ -33,25 +53,47 @@ const Home = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (formData.destination.trim() === '') return;
+
+    const {
+      city,
+      food_preferences,
+      places_to_visit,
+      social_preference,
+      duration,
+    } = formData; // Destructure the correct properties
+
+    // Check for the 'city' field
+    if (city.trim() === "") {
+      console.error("City field is empty.");
+      return;
+    }
 
     try {
-      const response = await fetch('http://127.0.0.1:5000/', {
-        method: 'POST',
+      const response = await fetch("http://127.0.0.1:5000/", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          city,
+          food_preferences,
+          places_to_visit,
+          social_preference,
+          duration,
+        }),
+        credentials: "include",
       });
 
       if (!response.ok) {
-        throw new Error('Failed to fetch the response from the backend');
+        throw new Error("Failed to fetch the response from the backend");
       }
 
-      await response.json();
-      navigate("/interests");
+      const data = await response.json();
+      console.log("Data:", data);
+
+      navigate("/output");
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
     }
   };
 
@@ -80,7 +122,7 @@ const Home = () => {
               value={formData[fields[currentField].name]}
               onChange={handleChange}
               onKeyDown={(e) => {
-                if (e.key === 'Enter') {
+                if (e.key === "Enter") {
                   e.preventDefault();
                   handleNextField();
                 }
@@ -89,13 +131,12 @@ const Home = () => {
             />
           )}
 
-
-
           {currentField === fields.length && (
             <button
               type="submit"
               className="h-20 w-[45%] bg-violet-600 rounded-3xl px-7 py-2 focus:outline-none text-lg shadow-2xl shadow-black/90 transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-violet-900/50 opacity-90 focus:opacity-100"
-              autofocus
+              autoFocus
+              onClick={handleSubmit}
             >
               Submit
             </button>
