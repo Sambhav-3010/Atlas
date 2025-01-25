@@ -12,7 +12,7 @@ const Home = () => {
         <form className="w-full z-1">
           <label htmlFor="destination" className="sr-only">Destination</label>
           <input 
-            className="h-20 w-[45%] border-2 border-gray-300 bg-gray-100 rounded-md px-7 py-2 focus:outline-none focus:ring-2 placeholder-gray-400 text-lg" 
+            className="h-20 w-[45%] border-2 border-gray-300 bg-black rounded-md px-7 py-2 focus:outline-none focus:ring-2 placeholder-gray-400 text-lg" 
             type="text" 
             id="destination" 
             name="destination" 
