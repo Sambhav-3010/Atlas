@@ -54,7 +54,7 @@ const Home = () => {
       }
 
       await response.json();
-      navigate("/interests");
+      navigate("/output");
     } catch (error) {
       console.error('Error:', error);
     } finally {

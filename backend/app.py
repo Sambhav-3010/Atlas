@@ -13,10 +13,10 @@ def api():
         if not data:
             return jsonify({"error": "Invalid input data"}), 400
 
-        city = data.get('city')
-        food_preferences = data.get('food_preferences')
-        places_to_visit = data.get('places_to_visit')
-        social_preference = data.get('social_preference')
+        city = data.get('destination')
+        food_preferences = data.get('food')
+        places_to_visit = data.get('places')
+        social_preference = data.get('social')
         duration = data.get('duration')
 
         print(city, food_preferences, places_to_visit, social_preference, duration)
@@ -24,16 +24,12 @@ def api():
         if not all([city, food_preferences, places_to_visit, social_preference, duration]):
             return jsonify({"error": "All fields are required"}), 400
 
-        # Call process_input
         response = process_input(city, food_preferences, places_to_visit, social_preference, duration)
-        # Ensure response is JSON serializable
         file_path = 'response.json'
         
-        # Check if the file exists and delete it before creating a new one
         if os.path.exists(file_path):
             os.remove(file_path)
-        
-        # Save response to the file
+    
         with open(file_path, 'w') as f:
             json.dump(response, f)
         
@@ -60,7 +56,8 @@ def get():
     
     finally:
         if os.path.exists(file_path):
-            os.remove(file_path)
+            with open(file_path, 'w') as f:
+                f.truncate(0)
 
 if __name__ == '__main__':
     app.run(debug=True)
