@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import ShapeBlur from "./ShapeBlur";
+import ShapeBlur from "./ui/ShapeBlur";
 
 const Navbar = () => {
   return (
@@ -17,7 +17,7 @@ const Navbar = () => {
       </div>
 
       {/* Navigation Links */}
-      <ul className="flex items-center space-x-10 text-lg font-medium">
+      <ul className="flex items-center space-x-10 text-2xl font-medium">
         <li>
           <Link to="/" className="text-white hover:text-pink-400 transition duration-300">
             Home
