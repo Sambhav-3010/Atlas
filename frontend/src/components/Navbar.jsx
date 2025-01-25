@@ -5,14 +5,14 @@ import ShapeBlur from "./ui/ShapeBlur";
 const Navbar = () => {
   return (
     <nav
-      className="flex items-center justify-between p-4 bg-black/60 rounded-2xl backdrop-blur-md shadow-md max-w-7xl mx-auto"
+      className="flex items-center justify-between p-4 rounded-2xl backdrop-blur-md shadow-md mx-0 my-0 h-28 w-[60%]"
       style={{
         background: "linear-gradient(135deg, rgba(30, 30, 30, 0.9), rgba(0, 0, 0, 0.7))",
         border: "1px solid rgba(255, 255, 255, 0.2)",
       }}
     >
       {/* ShapeBlur effect as Logo */}
-      <div className="flex items-center justify-center w-32 h-32 rounded-full overflow-hidden">
+      <div className="flex items-center justify-center w-20 h-20 rounded-full">
         <ShapeBlur className="w-full h-full" />
       </div>
 
