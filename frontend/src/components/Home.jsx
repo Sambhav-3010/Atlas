@@ -3,15 +3,29 @@ import { useNavigate } from 'react-router-dom';
 import Spline from './Spline';
 
 const Home = () => {
-  const [destination, setDestination] = useState('');
   const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    destination: "",
+    food: "",
+    places:"",
+    social:"",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (destination.trim() === '') return;
 
     try {
-      const response = await fetch('http://your-backend-url/api/destination', {
+      const response = await fetch('http://127.0.0.1:5000/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -24,7 +38,7 @@ const Home = () => {
       }
 
       const data = await response.json();
-      navigate(`/interests/${destination}`, { state: { data } });
+      navigate("/interests");
     } catch (error) {
       console.error('Error:', error);
     }
@@ -50,7 +64,7 @@ const Home = () => {
             name="destination"
             placeholder="Enter your dream destination here!"
             value={destination}
-            onChange={(e) => setDestination(e.target.value)}
+            onChange={handleChange}
           />
         </form>
       </div>

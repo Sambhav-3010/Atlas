@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, props } from 'react';
 import { useParams } from 'react-router-dom';
 
-const Interests = () => {
+const Interests = (props) => {
   const data = location.state?.data;
   const { destination } = useParams(); 
   const [interests, setInterests] = useState([]);
