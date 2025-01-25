@@ -1,46 +1,27 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Spline from "./Spline";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Spline from './Spline';
+import { OrbitProgress } from 'react-loading-indicators'; 
 
 const Home = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    city: "",
-    food_preferences: "",
-    places_to_visit: "",
-    social_preference: "",
-    duration: "",
+    destination: "",
+    food: "",
+    places: "",
+    social: "",
+    duration: ""
   });
 
   const [currentField, setCurrentField] = useState(0);
 
   const fields = [
-    {
-      id: "city",
-      name: "city",
-      placeholder: "Enter your dream destination here!",
-    },
-    {
-      id: "food_preferences",
-      name: "food_preferences",
-      placeholder: "Enter your food preferences here!",
-    },
-    {
-      id: "places_to_visit",
-      name: "places_to_visit",
-      placeholder: "Enter places you want to visit!",
-    },
-    {
-      id: "social_preference",
-      name: "social_preference",
-      placeholder: "Enter your social preferences!",
-    },
-    {
-      id: "duration",
-      name: "duration",
-      placeholder: "Enter the duration of your trip!",
-    },
+    { id: "destination", name: "destination", placeholder: "Enter your dream destination here!" },
+    { id: "food", name: "food", placeholder: "Enter your food preferences here!" },
+    { id: "places", name: "places", placeholder: "Enter places you want to visit!" },
+    { id: "social", name: "social", placeholder: "Enter your social preferences!" },
+    { id: "duration", name: "duration", placeholder: "Enter the duration of your trip!" }
   ];
 
   const handleChange = (e) => {
@@ -51,49 +32,33 @@ const Home = () => {
     }));
   };
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (formData.destination.trim() === '') return;
 
-    const {
-      city,
-      food_preferences,
-      places_to_visit,
-      social_preference,
-      duration,
-    } = formData; // Destructure the correct properties
-
-    // Check for the 'city' field
-    if (city.trim() === "") {
-      console.error("City field is empty.");
-      return;
-    }
+    setIsLoading(true); 
 
     try {
-      const response = await fetch("http://127.0.0.1:5000/", {
-        method: "POST",
+      const response = await fetch('http://127.0.0.1:5000/', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          city,
-          food_preferences,
-          places_to_visit,
-          social_preference,
-          duration,
-        }),
-        credentials: "include",
+        body: JSON.stringify(formData),
       });
 
       if (!response.ok) {
-        throw new Error("Failed to fetch the response from the backend");
+        throw new Error('Failed to fetch the response from the backend');
       }
 
-      const data = await response.json();
-      console.log("Data:", data);
-
-      navigate("/output");
+      await response.json();
+      navigate("/interests");
     } catch (error) {
-      console.error("Error:", error);
+      console.error('Error:', error);
+    } finally {
+      setIsLoading(false); 
     }
   };
 
@@ -106,7 +71,6 @@ const Home = () => {
       setCurrentField(currentField - 1);
     }
   };
-
 
   return (
     <div className="h-screen w-full text-white mt-10">
@@ -130,7 +94,7 @@ const Home = () => {
           {currentField < fields.length && (
             <input
               key={fields[currentField].id}
-              className="h-20 w-[45%] bg-black bg-opacity-50 opacity-80 rounded-3xl px-7 py-2 focus:outline-none placeholder-gray-200 text-lg shadow-2xl shadow-black/90 transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-violet-900/50"
+              className="h-20 w-[45%] bg-black bg-opacity-50 opacity-80 rounded-3xl px-7 py-2 focus:outline-none placeholder-white text-lg shadow-2xl shadow-black/90 transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-violet-900/50 z-10"
               type="text"
               id={fields[currentField].id}
               name={fields[currentField].name}
@@ -138,7 +102,7 @@ const Home = () => {
               value={formData[fields[currentField].name]}
               onChange={handleChange}
               onKeyDown={(e) => {
-                if (e.key === "Enter") {
+                if (e.key === 'Enter') {
                   e.preventDefault();
                   handleNextField();
                 }
@@ -146,19 +110,27 @@ const Home = () => {
               autoFocus
             />
           )}
-
-
-
-          {currentField === fields.length && (
+          {currentField === fields.length && !isLoading && (
             <button
               type="submit"
               className="h-20 w-[45%] bg-violet-600 rounded-3xl px-7 py-2 focus:outline-none text-lg shadow-2xl shadow-black/90 transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-violet-900/50 opacity-90 focus:opacity-100"
-              autoFocus
-              onClick={handleSubmit}
             >
               Submit
             </button>
           )}
+            {isLoading && (
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center z-20">
+                <OrbitProgress 
+                  variant="split-disc" 
+                  dense 
+                  color="#f2e9f2" 
+                  size="medium" 
+                  text="" 
+                  textColor="#f2e9f2" 
+                  className="bg-violet-600 rounded-3xl p-4" 
+                /> 
+              </div>
+            )}
         </form>
       </div>
     </div>

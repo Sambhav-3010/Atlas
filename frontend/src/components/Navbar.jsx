@@ -4,6 +4,7 @@ import ShapeBlur from "./ui/ShapeBlur";
 
 const Navbar = () => {
   return (
+    <>
     <nav
       className="flex items-center justify-between p-4 rounded-2xl backdrop-blur-md shadow-md mx-0 my-0 h-28 w-[60%]"
       style={{
@@ -34,7 +35,10 @@ const Navbar = () => {
         </li>
       </ul>
     </nav>
-  );
+    <div className="absolute bottom-0 right-4"> 
+      <span className="bg-black text-white p-2 rounded-sm">A Mira Flows Creation</span> 
+    </div>
+  </>);
 };
 
 export default Navbar;

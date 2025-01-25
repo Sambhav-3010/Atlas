@@ -30,7 +30,7 @@ const roadmapData = [
     },
     {
         id: 5,
-        title: "Get your destination planned", 
+        title: "Get your outing planned", 
         description: "Sit back and wait a few seconds while Mira gives you an awesome plan to seize the day!",
         color: "bg-[#9e39bf]",
     },
