@@ -1,0 +1,63 @@
+version: "0.0.1"
+
+metadata:
+  name: "travel-helper"
+  description: "An intelligent travel assistant to help you explore destinations based on your preferences."
+  author: "sambhav-3010"
+  tags: [travel, recommendation, preferences]
+  private: true
+
+inputs:
+  city:
+    type: string
+    description: "The city you want to visit."
+    required: true
+    example: "Paris"
+  food_preferences:
+    type: string
+    description: "Your food preferences (e.g., vegetarian, seafood, local cuisine)."
+    required: true
+    example: "Local cuisine, seafood"
+  places_to_visit:
+    type: string
+    description: "Types of places you want to visit (e.g., museums, parks, historical sites)."
+    required: true
+    example: "Museums, parks"
+  social_preference:
+    type: string
+    description: "Are you more of an introvert or an extrovert? This helps suggest appropriate activities."
+    required: true
+    example: "Introvert"
+
+model:
+  provider: "openai"
+  name: "gpt-4o"
+
+prompt: |
+  You are a travel-helper AI. Based on the following inputs:
+  - City: {city}
+  - Food Preferences: {food_preferences}
+  - Types of Places to Visit: {places_to_visit}
+  - Social Preference: {social_preference}
+  
+  Suggest a list of activities and places in the city that align with the user's preferences. Be specific and include descriptions for each suggestion.
+
+readme: |
+  Travel-Helper AI
+  
+  This flow helps users plan their trips by generating personalized travel recommendations based on their preferences:
+  
+  Inputs:
+  - City: The destination city you want to visit.
+  - Food Preferences: What type of food you enjoy (e.g., vegetarian, seafood, local cuisine).
+  - Places to Visit: Types of attractions you like (e.g., museums, parks, shopping areas).
+  - Social Preference: Whether you prefer introverted or extroverted activities.
+  
+  Example Usage:
+  - Input: "City: Paris, Food Preferences: Local cuisine, Places to Visit: Museums, parks, Social Preference: Introvert"
+  - Output: Suggestions for Parisian museums, serene parks, and cozy restaurants.
+
+  Features:
+  - Customizable recommendations
+  - City-based filtering
+  - Focused on user preferences for better travel experiences
