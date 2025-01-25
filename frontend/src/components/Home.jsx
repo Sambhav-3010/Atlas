@@ -101,6 +101,13 @@ const Home = () => {
     setCurrentField((prevField) => prevField + 1);
   };
 
+  const handleBackField = () => {
+    if (currentField > 0) {
+      setCurrentField(currentField - 1);
+    }
+  };
+
+
   return (
     <div className="h-screen w-full text-white mt-10">
       <div className="flex justify-center items-center h-full">
@@ -109,8 +116,17 @@ const Home = () => {
         </div>
         <form
           onSubmit={handleSubmit}
-          className="w-full z-10 flex flex-col items-center space-y-4"
+          className="w-full z-10 flex flex-col items-center space-y-4 relative"
         >
+          {currentField > 0 && (
+            <button
+              type="button"
+              className="absolute top-0 left-30 mt-2 ml-2 h-10 w-20 rounded-lg px-2 py-1 text-white focus:outline-none hover:shadow-blue-300 hover:scale-105 "
+              onClick={handleBackField}
+            >
+              Previous
+            </button>
+          )}
           {currentField < fields.length && (
             <input
               key={fields[currentField].id}
@@ -130,6 +146,8 @@ const Home = () => {
               autoFocus
             />
           )}
+
+
 
           {currentField === fields.length && (
             <button

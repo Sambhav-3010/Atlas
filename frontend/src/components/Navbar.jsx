@@ -11,13 +11,16 @@ const Navbar = () => {
         border: "1px solid rgba(255, 255, 255, 0.2)",
       }}
     >
-        <div className="flex items-center justify-center w-20 h-20 rounded-full">
-          <Link to="/">
-            <ShapeBlur className="w-full h-full" />
-          </Link>
-        </div>
+      <div className="flex items-center justify-center w-20 h-20 rounded-full relative">
+        <Link to="/">
+          <span className="absolute left-1/4 top-1/2 transform -translate-y-1/2 text-gray-600 font-bold text-6xl opacity-90">
+            Atlas
+          </span>
+          <ShapeBlur className="w-full h-full z-0" /> 
+        </Link>
+      </div>
 
-        {/* Navigation Links */}
+      {/* Navigation Links */}
       <ul className="flex items-center space-x-10 text-2xl font-medium">
         <li>
           <Link to="/" className="text-white hover:text-violet-900/50 transition duration-300">
