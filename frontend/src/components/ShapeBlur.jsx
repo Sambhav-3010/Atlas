@@ -174,7 +174,6 @@ useEffect(() => {
     defines: { VAR: variation },
     transparent: true,
     blending: THREE.AdditiveBlending,
-    defines: { VAR: variation },
     transparent: true
   });
 
@@ -250,13 +249,8 @@ useEffect(() => {
 
 return (
   <div
-    className={className}
+    className="h-32"
     ref={mountRef}
-    style={{
-      width: '200px', // 🔥 Ensure this is visible
-      height: '200px',
-      backgroundColor: 'red', // 🔥 Temporary debug color
-    }}
   />
 );
 
