@@ -28,19 +28,25 @@ inputs:
     description: "Are you more of an introvert or an extrovert? This helps suggest appropriate activities."
     required: true
     example: "Introvert"
+  duration:
+    type: string
+    description: "How many days you want to stay."
+    required: true
+    example: "10 days"
 
 model:
   provider: "openai"
   name: "gpt-4o"
 
 prompt: |
-  You are a travel-helper AI. Based on the following inputs:
-  - City: {city}
-  - Food Preferences: {food_preferences}
-  - Types of Places to Visit: {places_to_visit}
-  - Social Preference: {social_preference}
-  
-  Suggest a list of activities and places in the city that align with the user's preferences. Be specific and include descriptions for each suggestion.
+  You are an intelligent travel assistant AI. Based on the following inputs:
+    - City: {city}
+    - Food Preferences: {food_preferences}
+    - Types of Places to Visit: {places_to_visit}
+    - Social Preference: {social_preference}
+    - Duration of Stay: {duration}
+    
+    Provide a detailed day-by-day itinerary for the user's trip, including specific activities, places to visit, and dining options that align with their preferences. Ensure the recommendations are well-balanced, considering the user's social preference and the duration of their stay. Include brief descriptions for each suggestion to enhance the travel experience.
 
 readme: |
   Travel-Helper AI
