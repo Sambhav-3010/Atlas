@@ -3,10 +3,11 @@ import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Spline from "./components/Spline";
 import About from "./components/About";
+import Interests from './components/Interests';
 
 function App() {
   return (
-    <div className=" flex items-center flex-col h-screen w-full mx-auto p-3 text-center bg-black">
+    <div className=" flex items-center flex-col h-screen w-full mx-auto p-3 text-center ">
       <Router>
         <Navbar />
         <Routes>
