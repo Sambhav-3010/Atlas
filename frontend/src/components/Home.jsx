@@ -63,7 +63,7 @@ const Home = () => {
             id="destination"
             name="destination"
             placeholder="Enter your dream destination here!"
-            value={destination}
+            value={formData.destination}
             onChange={handleChange}
           />
         </form>
