@@ -11,12 +11,13 @@ const Navbar = () => {
         border: "1px solid rgba(255, 255, 255, 0.2)",
       }}
     >
-      {/* ShapeBlur effect as Logo */}
-      <div className="flex items-center justify-center w-20 h-20 rounded-full">
-        <ShapeBlur className="w-full h-full" />
-      </div>
+        <div className="flex items-center justify-center w-20 h-20 rounded-full">
+          <Link to="/">
+            <ShapeBlur className="w-full h-full" />
+          </Link>
+        </div>
 
-      {/* Navigation Links */}
+        {/* Navigation Links */}
       <ul className="flex items-center space-x-10 text-2xl font-medium">
         <li>
           <Link to="/" className="text-white hover:text-pink-400 transition duration-300">

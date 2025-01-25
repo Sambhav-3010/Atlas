@@ -1,31 +1,45 @@
-import React from "react";
-import Spline from "./Spline";
-
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Spline from './Spline';
 
 const Home = () => {
+  const [destination, setDestination] = useState('');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'Enter' && destination.trim() !== '') {
+        navigate(`/interests/${destination}`);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [destination, navigate]);
+
   return (
-    <>
-      <div className="flex justify-center items-center h-screen w-[80%] text-white">
+    <div className="h-screen w-full text-white ">
+      <div className="flex justify-center items-center h-full">
         <div className="absolute inset-0 z-0 mt-20">
           <Spline />
         </div>
-        <form className="w-full z-1">
+        <form className="w-full z-10 flex justify-center">
           <label htmlFor="destination" className="sr-only">Destination</label>
-          <input 
-            className="h-20 w-[45%] border-2 border-gray-300 bg-black rounded-md px-7 py-2 focus:outline-none focus:ring-2 placeholder-gray-400 text-lg" 
-            type="text" 
-            id="destination" 
-            name="destination" 
-            placeholder="Enter your dream estination here!"
+          <input
+            className="h-20 w-[45%] bg-black bg-opacity-50 opacity-80 rounded-3xl px-7 py-2 focus:outline-none placeholder-gray-200 text-lg shadow-2xl shadow-black/90 transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-violet-900/50"
+            type="text"
+            id="destination"
+            name="destination"
+            placeholder="Enter your dream destination here!"
+            value={destination}
+            onChange={(e) => setDestination(e.target.value)}
           />
-          {/* <input 
-            type="submit" 
-            className="w-full hover:bg-blue-600 text-white font-semibold py-3 px-4 rounded-md text-lg"
-            value="Submit"
-          /> */}
         </form>
       </div>
-    </>
+    </div>
   );
 };
 
