@@ -174,7 +174,6 @@ useEffect(() => {
     defines: { VAR: variation },
     transparent: true,
     blending: THREE.AdditiveBlending,
-    transparent: true
   });
 
   const quad = new THREE.Mesh(geo, material);

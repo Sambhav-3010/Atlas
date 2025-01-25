@@ -1,8 +1,7 @@
 @import "tailwindcss";
 
 body{
-    margin-top: 0px;
     background-color: black;
-    background-image: radial-gradient(circle at center, black 0%, #061d5d 30%, black 60%);
-    background-repeat: no-repeat;
+    /* background-image: radial-gradient(circle at center 70%, black 0%, #061d5d 30%, black 60%); */
+    /* background-repeat: no-repeat; */
 }

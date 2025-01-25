@@ -2,9 +2,17 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 const Interests = () => {
+  const data = location.state?.data;
   const { destination } = useParams(); 
   const [interests, setInterests] = useState([]);
   const [newInterest, setNewInterest] = useState('');
+  if (!data) {
+    return (
+      <div className="h-screen w-full flex justify-center items-center">
+        <p className="text-lg text-gray-600">No data available.</p>
+      </div>
+    );
+  }
 
   const handleInputChange = (event) => {
     setNewInterest(event.target.value);
