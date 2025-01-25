@@ -130,11 +130,11 @@ const ShapeBlur = ({
 className = '',
 variation = 0,
 pixelRatioProp = 2,
-shapeSize = 1.2,
-roundness = 0.4,
-borderSize = 0.05,
-circleSize = 0.3,
-circleEdge = 0.5
+shapeSize = 1.3,
+roundness = 0.5,
+borderSize = 0.1,
+circleSize = 0.4,
+circleEdge = 2
 }) => {
 const mountRef = useRef();
 
