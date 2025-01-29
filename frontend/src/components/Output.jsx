@@ -10,7 +10,7 @@ const Interests = () => {
         const response = await fetch('http://127.0.0.1:5000/get', {
           method: 'GET',
           headers: {
-            'Content-Type': 'application/json', // Optional: Add headers if required by the backend
+            'Content-Type': 'application/json',
           },
         });
 
@@ -44,35 +44,35 @@ const Interests = () => {
 
   if (loading) {
     return (
-      <div className="h-screen w-full flex justify-center items-center">
-        <p className="text-lg text-gray-600">Loading...</p>
+      <div className="h-screen w-full flex justify-center items-center bg-black">
+        <p className="text-lg text-gray-400">Loading...</p>
       </div>
     );
   }
 
   if (interests.length === 0) {
     return (
-      <div className="h-screen w-full flex justify-center items-center">
-        <p className="text-lg text-gray-600">No interests available. Please try again.</p>
+      <div className="h-screen w-full flex justify-center items-center bg-black">
+        <p className="text-lg text-gray-400">No interests available. Please try again.</p>
       </div>
     );
   }
 
   return (
-    <div className="w-full text-white mt-20">
-      <div className="flex justify-center items-center flex-col h-full">
+    <div className="w-full text-white bg-black mt-20">
+      <div className="flex flex-col items-center space-y-8 px-6">
         <h1 className="text-3xl font-bold mb-4 text-left w-full">Travel Itinerary</h1>
 
-        <div className="flex flex-col items-start space-y-8 px-6 text-left w-full">
+        <div className="flex flex-col space-y-8 w-full">
           {interests.map((day, index) => {
             const [dayTitle, ...activities] = day.split('\n').map(line => line.trim()).filter(line => line.length > 0);
 
             return (
-              <div key={index} className="space-y-4 w-full">
-                <h2 className="text-xl font-semibold">{parseBoldText(dayTitle)}</h2>
-                <ul className="list-none pl-6 text-gray-200">
+              <div key={index} className="bg-gray-800 p-6 rounded-lg shadow-lg w-full">
+                <h2 className="text-2xl font-semibold text-blue-400 mb-4">{parseBoldText(dayTitle)}</h2>
+                <ul className="list-none pl-6 space-y-4">
                   {activities.map((activity, idx) => (
-                    <li key={idx} className="text-lg" dangerouslySetInnerHTML={{ __html: parseBoldText(activity) }} />
+                    <li key={idx} className="text-lg text-gray-200" dangerouslySetInnerHTML={{ __html: parseBoldText(activity) }} />
                   ))}
                 </ul>
               </div>

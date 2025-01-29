@@ -35,9 +35,9 @@ const Navbar = () => {
         </li>
       </ul>
     </nav>
-    <div className="absolute bottom-0 right-4"> 
-      <span className="bg-black text-white p-2 rounded-sm">A Mira Flows Creation</span> 
-    </div>
+    {/* <div className="absolute bottom-0 right-4"> 
+      <span className="bg-black text-white p-2 rounded-sm">Travel Planner</span> 
+    </div> */}
   </>);
 };
 
