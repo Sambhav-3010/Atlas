@@ -7,7 +7,7 @@ import Output from "./components/Output";
 
 function App() {
   return (
-    <div className=" flex items-center flex-col h-screen w-full mx-auto p-3 text-center ">
+    <div className="flex items-center flex-col h-screen w-full mx-auto p-3 text-center ">
       <Router>
         <Navbar />
         <Routes>
