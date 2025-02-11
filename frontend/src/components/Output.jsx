@@ -7,7 +7,7 @@ const Interests = () => {
   useEffect(() => {
     const fetchBackendData = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:5000/get', {
+        const response = await fetch('https://atlas-backend-gamma.vercel.app/get', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
