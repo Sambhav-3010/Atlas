@@ -39,7 +39,7 @@ router.post("/chat", async (req, res) => {
     - Social Preference: ${social_preference}
     - Duration of Stay: ${duration}
     
-    Provide a detailed day-by-day itinerary for the user's trip, including specific activities, places to visit, and dining options that align with their preferences. Ensure the recommendations are well-balanced, considering the user's social preference and the duration of their stay. Include brief descriptions for each suggestion to enhance the travel experience.`;
+    Provide a detailed day-by-day itinerary for the user's trip, including specific activities, places to visit, and dining options that align with their preferences. Ensure the recommendations are well-balanced, considering the user's social preference and the duration of their stay. Include brief descriptions for each suggestion to enhance the travel experience. Ensure that all the days are covered`;
 
     res.setHeader("Content-Type", "application/json");
     let responseContent = "";

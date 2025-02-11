@@ -1,44 +1,35 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const Interests = () => {
-  const [interests, setInterests] = useState([]);
+  const location = useLocation();
+  const responseText = location.state?.response || 'No response received.';
+
   const [loading, setLoading] = useState(true);
+  const [interests, setInterests] = useState([]);
 
   useEffect(() => {
-    const fetchBackendData = async () => {
+    const fetchInterests = async () => {
       try {
-        const response = await fetch('https://atlas-backend-gamma.vercel.app/get', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error('Failed to fetch data from the backend');
-        }
-
-        const data = await response.json();
-        console.log('Data from the backend:', data);
-        const rawText = data.result;
-
-        // Clean up and split the raw text into an array of days
-        const days = rawText.split('###').map(day => day.trim()).filter(day => day.length > 0);
-
-        setInterests(days); // Store each day's activities as separate entries
+        const parsedInterests = responseText
+          .trim() 
+          .split(/\n\s*\n/) 
+          .filter((text) => text.trim().length > 0); 
+  
+        setInterests(parsedInterests);
       } catch (error) {
-        console.error('Error fetching the backend data:', error);
-        setInterests([]); // Ensure interests is set to an empty array in case of error
+        console.error('Error processing interests:', error);
+        setInterests([]);
       } finally {
         setLoading(false);
       }
     };
-
-    fetchBackendData();
-  }, []);
+  
+    fetchInterests();
+  }, [responseText]);
+  
 
   const parseBoldText = (text) => {
-    // Replace **text** with <strong>text</strong> to make it bold
     return text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
   };
 
@@ -65,11 +56,14 @@ const Interests = () => {
 
         <div className="flex flex-col space-y-8 w-full">
           {interests.map((day, index) => {
-            const [dayTitle, ...activities] = day.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+            const [dayTitle, ...activities] = day.split('\n').map((line) => line.trim()).filter((line) => line.length > 0);
 
             return (
               <div key={index} className="bg-gray-800 p-6 rounded-lg shadow-lg w-full">
-                <h2 className="text-2xl font-semibold text-blue-400 mb-4">{parseBoldText(dayTitle)}</h2>
+                <h2
+                  className="text-2xl font-semibold text-blue-400 mb-4"
+                  dangerouslySetInnerHTML={{ __html: parseBoldText(dayTitle) }}
+                />
                 <ul className="list-none pl-6 space-y-4">
                   {activities.map((activity, idx) => (
                     <li key={idx} className="text-lg text-gray-200" dangerouslySetInnerHTML={{ __html: parseBoldText(activity) }} />
